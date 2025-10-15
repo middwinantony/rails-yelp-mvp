@@ -1,0 +1,18 @@
+<%= form_with model: @restaurant, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :address %>
+  <%= form.text_area :address %>
+
+  <%= form.label :phone_number %>
+  <%= form.number_field :phone_number %>
+
+  <%= form.label :category %>
+  <%= form.select :category, Restaurant::CATEGORIES %>
+
+  <%= form.label :rating %>
+  <%= form.number_field :rating, in: 0..5 %>
+
+  <%= form.submit "Create Restaurant" %>
+<% end %>
