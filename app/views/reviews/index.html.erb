@@ -1,0 +1,7 @@
+<h1>
+  <% @reviews.each do |review| %>
+   <%= review.restaurant_id%>
+   <%= review.rating %>
+   <%= review.content %>
+  <% end%>
+</h1>

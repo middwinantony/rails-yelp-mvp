@@ -1,3 +1,5 @@
+<% categories = ["chinese", "italian", "japanese", "french", "belgian"] %>
+
 <%= form_with model: @restaurant, local: true do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
@@ -9,7 +11,7 @@
   <%= form.number_field :phone_number %>
 
   <%= form.label :category %>
-  <%= form.select :category, Restaurant::CATEGORIES %>
+  <%= form.select :category, categories %>
 
   <%= form.label :rating %>
   <%= form.number_field :rating, in: 0..5 %>
