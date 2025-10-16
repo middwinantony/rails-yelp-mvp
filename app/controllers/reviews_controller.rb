@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_restaurant
 
   def index
-    @reviews = @restaurant.reviews.all
+    @reviews = @restaurant.reviews.includes(:restaurant)
   end
 
   def new

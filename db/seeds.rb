@@ -10,6 +10,9 @@
 
 require 'faker'
 
+Review.destroy_all
+Restaurant.destroy_all
+
 10.times do
   restaurant = Restaurant.create!(
     name: Faker::Restaurant.name,
@@ -17,10 +20,12 @@ require 'faker'
     phone_number: Faker::PhoneNumber.phone_number,
     category: ["chinese", "italian", "japanese", "french", "belgian"].sample
   )
-  10.times do
-    restaurant.reviews.create!(
-      content: Faker::Restaurant.review,
-      rating: rand(0..5)
+
+  5.times do
+    Review.create!(
+      restaurant_id: restaurant.id,
+      rating: rand(1..5),
+      content: Faker::Restaurant.review
     )
   end
 end
