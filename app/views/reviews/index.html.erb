@@ -1,7 +1,30 @@
-<h1>Reviews for <%= @restaurant.name %></h1>
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">
+    Reviews for <%= @restaurant.name %>
+  </h1>
 
-<% @reviews.each do |review| %>
-  <p>Rating: <%= review.rating %>/5</p>
-  <p>Comment: <%= review.content %></p>
-<% end %>
-<%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+  <% if @restaurant.reviews.any? %>
+    <div class="row">
+      <% @restaurant.reviews.each do |review| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body">
+              <h5 class="card-title">⭐ <%= review.rating %>/5</h5>
+              <p class="card-text"><%= review.content %></p>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on <%= review.created_at.strftime("%b %d, %Y") %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-muted">No reviews yet for this restaurant.</p>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+    <%= link_to "Back to Restaurants", restaurants_path, class: "btn btn-outline-secondary ms-2" %>
+  </div>
+</div>
