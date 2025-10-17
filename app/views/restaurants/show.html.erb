@@ -1,6 +1,34 @@
-<h1>
-  <%= @restaurant.name %>
-  <%= @restaurant.address %>
-  <%= @restaurant.phone_number %>
-  <%= @restaurant.category %>
-</h1>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-7">
+      <img src="/assets/restaurant1.jpg" class="img-fluid rounded shadow-sm mb-4" alt="restaurant">
+    </div>
+    <div class="col-lg-5">
+      <h1 class="fw-bold mb-3"><%= @restaurant.name %></h1>
+      <p class="text-muted"><i class="bi bi-geo-alt"></i> <%= @restaurant.address %></p>
+      <p><strong>Category:</strong> <%= @restaurant.category.capitalize %></p>
+      <p><strong>Average Rating:</strong> ⭐ <%= @restaurant.reviews.average(:rating)&.round(1) || "N/A" %></p>
+
+      <%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary mt-3" %>
+      <%= link_to "Back to All Restaurants", restaurants_path, class: "btn btn-outline-secondary mt-3 ms-2" %>
+    </div>
+  </div>
+
+  <hr class="my-5">
+
+  <h3 class="fw-bold mb-4">Customer Reviews</h3>
+
+  <% if @restaurant.reviews.any? %>
+    <% @restaurant.reviews.each do |review| %>
+      <div class="card mb-3 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title text-warning">⭐ <%= review.rating %>/5</h5>
+          <p class="card-text"><%= review.content %></p>
+          <p class="text-muted small mb-0">Posted <%= time_ago_in_words(review.created_at) %> ago</p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-muted">No reviews yet. Be the first to share your experience!</p>
+  <% end %>
+</div>

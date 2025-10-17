@@ -1,20 +1,28 @@
-<% categories = ["chinese", "italian", "japanese", "french", "belgian"] %>
+<div class="container my-5" style="max-width: 600px;">
+  <h1 class="fw-bold mb-4 text-center">Add a New Restaurant</h1>
 
-<%= form_with model: @restaurant, local: true do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form_with model: @restaurant, local: true, class: "shadow p-4 bg-light rounded" do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name, class: "form-control", placeholder: "Restaurant name" %>
+    </div>
 
-  <%= form.label :address %>
-  <%= form.text_area :address %>
+    <div class="mb-3">
+      <%= f.label :address, class: "form-label" %>
+      <%= f.text_field :address, class: "form-control", placeholder: "123 Main St, City" %>
+    </div>
 
-  <%= form.label :phone_number %>
-  <%= form.number_field :phone_number %>
+    <div class="mb-3">
+      <%= f.label :category, class: "form-label" %>
+      <%= f.select :category, ["Italian", "French", "Indian", "Japanese", "Fast food", "Mexican"], {}, class: "form-select" %>
+    </div>
 
-  <%= form.label :category %>
-  <%= form.select :category, categories %>
+    <div class="text-center">
+      <%= f.submit "Create Restaurant", class: "btn btn-success w-100 py-2 fw-semibold" %>
+    </div>
+  <% end %>
 
-  <%= form.label :rating %>
-  <%= form.number_field :rating, in: 0..5 %>
-
-  <%= form.submit "Create Restaurant" %>
-<% end %>
+  <div class="text-center mt-3">
+    <%= link_to "Back to Restaurants", restaurants_path, class: "text-secondary" %>
+  </div>
+</div>
